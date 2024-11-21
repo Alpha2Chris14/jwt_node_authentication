@@ -34,10 +34,16 @@ app.use(authRoutes);
 app.get("/set-cookies", (req, res) => {
   // res.setHeader("Set-Cookie", "newUser=true");
   res.cookie("newUser", false);
+  res.cookie("isEmployee", true, {
+    maxAge: 1000 * 60 * 60 * 24,
+    secure: true,
+    httpOnly: true,
+  });
   res.send("you got the cookies!");
 });
 
 app.get("/read-cookies", (req, res) => {
-  // res.setHeader("Set-Cookie", "newUser=true");
-  res.cookie("newUser");
+  const cookies = req.cookies;
+
+  res.json(cookies);
 });
