@@ -64,4 +64,10 @@ const login_post = async (req, res) => {
     res.status(400).json({ errorObj });
   }
 };
-module.exports = { signup_get, signup_post, login_get, login_post };
+
+const logout_get = async (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.redirect("/");
+};
+
+module.exports = { signup_get, signup_post, login_get, login_post, logout_get };
